@@ -1,0 +1,93 @@
+.carousel-container {
+    position: relative;
+    height: 100vh; 
+    overflow: hidden;
+  }
+  
+  .carousel-item {
+    height: 100vh; 
+  }
+  
+  .carousel-slide {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%; 
+    position: relative;
+  }
+  
+  .carousel-item img {
+    object-fit: cover; 
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+  
+  .carousel-content {
+    position: relative;
+    z-index: 1;
+    color: white; 
+    padding: 30px;
+    max-width: 500px;
+  }
+  
+  .carousel-content h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: black;
+  }
+  
+  .carousel-content p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: black;
+  }
+  
+  .carousel-content .btn {
+    margin-right: 10px;
+    background-color: #a5c422;
+    border: none;
+    color: white;
+  }
+  
+
+#book-btn{
+    background-color: #a5c422 ; 
+    color: white;
+}
+
+
+.custom-pagination .page-item.active .page-link {
+    background-color: #a5c422;
+    border-color: #a5c422;
+    color: black;
+  }
+  
+  .custom-pagination .page-item .page-link {
+    color: #a5c422;
+    border-color: #a5c422;
+  }
+  
+  .custom-pagination .page-item:hover .page-link {
+    background-color: #a5c422;
+    border-color: #a5c422;
+    color: black;
+  }
+  
+  .card-img-top {
+    width: 100%; 
+    height: 300px; 
+    object-fit: cover;
+    
+  }
+  
+  .card{
+    transition: transform 0.3s ease;
+  }
+  .card:hover{
+    transform: translateY(-10px);
+  }

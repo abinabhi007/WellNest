@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'poppins',sans-serif;
+}
+
+body, html {
+    overflow: visible;
+  }
+
+#login-btn{
+    background-color: #a5c422 !important;
+    color: white;
+}
+
+#logo{
+    height: 3em;
+    width: 4em;
+}
+
+.nav-link{
+    border-bottom: 4px solid transparent;
+    transition: 0.4s;
+}
+
+.nav-link:hover {
+    border-bottom: 2px solid #a5c422;
+    transition-delay: 4ms;
+}
+
+#nav-div {
+    background-color: #ffff !important; /* Ensure visibility */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }

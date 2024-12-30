@@ -1,0 +1,17 @@
+body{
+    background-color: #ECF3FF !important;
+}
+
+h2{
+    margin-top: 15px !important;
+    
+}
+
+#search{
+    margin-top: 0em;
+    max-width: 60em;
+}
+
+#search input{
+   margin-top: 10px;
+}

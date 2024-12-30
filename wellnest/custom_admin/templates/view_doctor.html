@@ -1,0 +1,57 @@
+{% extends 'layout/adminLayout.html'%}
+{% block 'content' %}
+<div class="container mt-5 w-100">
+    <div class="card shadow">
+        <div class="card-header bg-light text-center">
+            <h4 class="mb-0">Doctor Details</h4>
+        </div>
+        <div class="card-body">
+            <form>
+                <!-- Doctor's Name -->
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" value="{{ doctor.name }}" readonly>
+                </div>
+
+                <!-- Doctor's Image -->
+                <div class="mb-3">
+                    <label for="image" class="form-label">Image</label>
+                    <div class="border p-2 text-center">
+                        <!-- Display the image dynamically -->
+                        <img src="{{ doctor.image.url }}" alt="Doctor Image" class="img-fluid rounded" id="image">
+                    </div>
+                </div>
+
+                <!-- Doctor's Qualifications -->
+                <div class="mb-3">
+                    <label for="qualifications" class="form-label">Qualifications</label>
+                    <input type="text" class="form-control" id="qualifications" value="{{ doctor.qualification }}" readonly>
+                </div>
+
+                <!-- Doctor's Experience -->
+                <div class="mb-3">
+                    <label for="experience" class="form-label">Experience (in years)</label>
+                    <input type="number" class="form-control" id="experience" value="{{ doctor.experience }}" readonly>
+                </div>
+
+                <!-- Doctor's Department -->
+                <div class="mb-3">
+                    <label for="department" class="form-label">Department</label>
+                    <input type="text" class="form-control" id="department" value="{{ doctor.department.department_name }}" readonly>
+                </div>
+
+                <!-- Doctor's Contact Info -->
+                <div class="mb-3">
+                    <label for="contact" class="form-label">Contact Info</label>
+                    <input type="text" class="form-control" id="contact" value="{{ doctor.contact_number }}" readonly>
+                </div>
+
+                <!-- Back Button -->
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary" onclick="window.history.back();">Back</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

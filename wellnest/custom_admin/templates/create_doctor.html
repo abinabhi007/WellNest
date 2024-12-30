@@ -1,0 +1,61 @@
+{% extends 'layout/adminLayout.html' %}
+{% block 'content' %}
+<div class="container my-5 w-100">
+    <div class="card shadow">
+        <div class="card-header text-center bg-light text-dark">
+            <h4>Create Doctor Profile</h4>
+        </div>
+        <div class="card-body">
+            <form action="{% url 'create-doctor' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <!-- Doctor's Name -->
+                <div class="mb-3">
+                    <label for="name" class="form-label">Doctor's Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter doctor's name" required>
+                </div>
+
+                <!-- Doctor's Image -->
+                <div class="mb-3">
+                    <label for="image" class="form-label">Doctor's Image</label>
+                    <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+                </div>
+
+                <!-- Qualification -->
+                <div class="mb-3">
+                    <label for="qualification" class="form-label">Qualification</label>
+                    <input type="text" class="form-control" id="qualification" name="qualification" placeholder="Enter qualification" required>
+                </div>
+
+                <!-- Experience -->
+                <div class="mb-3">
+                    <label for="experience" class="form-label">Experience (Years)</label>
+                    <input type="number" class="form-control" id="experience" name="experience" placeholder="Enter years of experience" required>
+                </div>
+
+                <!-- Department -->
+                <div class="mb-3">
+                    <label for="department" class="form-label">Department</label>
+                    <select class="form-select" id="department" name="department" required style="color: black;">
+                        <option value="">Select department</option>
+                        {% for department in departments %}
+                            <option value="{{ department.id }}">{{ department.department_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="mb-3">
+                    <label for="contact" class="form-label">Contact Information</label>
+                    <input type="text" class="form-control" id="contact" name="contact_number" placeholder="Enter contact information" required>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success">Create Doctor Profile</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

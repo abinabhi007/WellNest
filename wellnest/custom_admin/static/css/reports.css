@@ -1,0 +1,15 @@
+*{
+    margin:0;
+    padding: 0;
+    font-family: 'poppins',sans-serif;
+}
+
+#date{
+    max-width: 16em !important;
+    margin-top: 1em;
+    padding-top: 1em;
+}
+
+#card{
+    
+}

@@ -1,0 +1,19 @@
+#department {
+    background-color: white;
+    color: black;
+    border: 1px solid #ccc;
+}
+
+#department:focus {
+    outline: none; /* Removing default focus outline */
+    border: 1px solid #007bff; /* Optional: Change focus border color */
+}
+
+#department option {
+    color: black;
+    background-color: white; /* Default background for options */
+}
+
+#department option:hover {
+    background-color: #f0f0f0; /* Hover background color */
+}

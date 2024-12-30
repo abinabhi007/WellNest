@@ -1,0 +1,48 @@
+{% extends 'layout/adminLayout.html' %}
+{% block 'content' %}
+<div class="container mt-5 w-100">
+    <div class="card shadow">
+      <div class="card-header bg-light text-center">
+        <h4 class="mb-0">Edit Doctor Details</h4>
+      </div>
+      <div class="card-body">
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ doctor.name }}">
+          </div>
+          <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input type="file" class="form-control" id="image" name="image">
+          </div>
+          <div class="mb-3">
+            <label for="qualifications" class="form-label">Qualifications</label>
+            <input type="text" class="form-control" id="qualifications" name="qualifications" value="{{ doctor.qualifications }}">
+          </div>
+          <div class="mb-3">
+            <label for="experience" class="form-label">Experience (in years)</label>
+            <input type="number" class="form-control" id="experience" name="experience" value="{{ doctor.experience }}">
+          </div>
+          <div class="mb-3">
+            <label for="department" class="form-label">Department</label>
+            <select class="form-select" id="department" name="department" required>
+                <option value="">Select department</option>
+                {% for dept in departments %}
+                    <option value="{{ dept.id }}" {% if dept.id == doctor.department.id %}selected{% endif %}>
+                        {{ dept.department_name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+          <div class="mb-3">
+            <label for="contact" class="form-label">Contact Info</label>
+            <input type="text" class="form-control" id="contact" name="contact" value="{{ doctor.contact_number }}">
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

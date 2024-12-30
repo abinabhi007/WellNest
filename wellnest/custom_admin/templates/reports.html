@@ -1,0 +1,46 @@
+{% extends 'layout/adminLayout.html' %}
+{% block 'content' %}
+{% load static %}
+
+<div class="container mt-5">
+    <div class="mb-4">
+        <h2><u>Doctor Consultation Report</u></h2>
+    </div>
+
+    <!-- Date Filter Form -->
+    <form method="GET" action="">
+        <div class="row g-3 align-items-center mb-4">
+            <div class="col-auto">
+                <label for="date" class="col-form-label">Filter by Date:</label>
+            </div>
+            <div class="col-auto">
+                <input type="date" class="form-control" id="date" name="date" value="{{ selected_date }}" onchange="this.form.submit()">
+            </div>
+        </div>
+    </form>
+
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="text-center table-success">
+            <tr>
+                <th>Doctor</th>
+                <th>Date</th>
+                <th>Patient Count</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            {% for report in reports %}
+            <tr>
+                <td>{{ report.doctor__name }}</td>
+                <td>{{ report.date }}</td>
+                <td>{{ report.patient_count }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No appointments for this date.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

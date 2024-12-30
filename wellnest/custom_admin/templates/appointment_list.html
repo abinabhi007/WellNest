@@ -1,0 +1,103 @@
+{% extends 'layout/adminLayout.html'%}
+{% block 'content' %}
+    <div class="container-fluid">
+        <h2><u>APPOINTMENT LIST</u></h2>
+        <form class="d-flex align-items-center mx-auto justify-content-between" id="search" method="GET">
+            <!-- Search Input for Doctor -->
+            <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search by doctor"
+                aria-label="Search"
+                name="doctor_name"
+                value="{{ request.GET.doctor_name }}"
+                id="doctor_name"
+                oninput="debouncedSubmit()">
+                
+            <!-- Date Input aligned to the right -->
+            <div class="mb-3 ms-3">
+                <label for="date" class="form-label">List By Date</label>
+                <input type="date" class="form-control" id="date" name="date" value="{{ request.GET.date }}" onchange="submitForm()">
+            </div>
+        </form>
+
+        <table class="table table-success table-striped">
+            <thead>
+                <tr>
+                    <th>Patient</th>
+                    <th>Doctor</th>
+                    <th>Department</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointment in appointments %}
+                    <tr>
+                        <td>{{ appointment.user.name }}</td>
+                        <td>{{ appointment.doctor.name }}</td>
+                        <td>{{ appointment.department.department_name }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="3">No appointments found for the selected date</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Pagination Controls -->
+        <div class="d-flex justify-content-center mt-4">
+            <nav>
+                <ul class="pagination">
+                    {% if appointments.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page=1&doctor_name={{ request.GET.doctor_name }}&date={{ request.GET.date }}" aria-label="First">
+                                <span aria-hidden="true">&laquo;&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ appointments.previous_page_number }}&doctor_name={{ request.GET.doctor_name }}&date={{ request.GET.date }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                    
+                    {% for i in appointments.paginator.page_range %}
+                        <li class="page-item {% if appointments.number == i %} active {% endif %}">
+                            <a class="page-link" href="?page={{ i }}&doctor_name={{ request.GET.doctor_name }}&date={{ request.GET.date }}">{{ i }}</a>
+                        </li>
+                    {% endfor %}
+
+                    {% if appointments.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ appointments.next_page_number }}&doctor_name={{ request.GET.doctor_name }}&date={{ request.GET.date }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ appointments.paginator.num_pages }}&doctor_name={{ request.GET.doctor_name }}&date={{ request.GET.date }}" aria-label="Last">
+                                <span aria-hidden="true">&raquo;&raquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <script>
+        let timeout;
+
+        // Debounce function to delay form submission until the user stops typing
+        function debouncedSubmit() {
+            clearTimeout(timeout);  // Clear the previous timeout
+            timeout = setTimeout(function() {
+                document.getElementById('search').submit();  // Submit the form after a delay
+            }, 500);  // Wait 500ms after the last keystroke
+        }
+
+        // Function to automatically submit the form when the date changes
+        function submitForm() {
+            document.getElementById('search').submit();
+        }
+    </script>
+{% endblock %}

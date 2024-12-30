@@ -1,0 +1,88 @@
+{% extends 'layout/adminLayout.html' %}
+{% block 'content' %}
+<div class="container-fluid mt-5">
+    <h2> <u>DOCTOR'S LIST</u></h2>
+    <a href="{% url 'create-doctor' %}" class="btn btn-success mt-3">Create</a>
+
+    <table class="table table-bordered table-striped mt-4">
+        <thead class="text-center table-success">
+            <tr>
+                <th>Doctor</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            {% for doctor in page_obj.object_list %}
+            <tr>
+                <td class="align-middle">{{ doctor.name }}</td>
+                <td class="align-middle">
+                    {% if doctor.is_enabled %}
+                        <span class="badge bg-success">Enabled</span>
+                    {% else %}
+                        <span class="badge bg-danger">Disabled</span>
+                    {% endif %}
+                </td>
+                <td class="align-middle">
+                    <div class="d-flex justify-content-center gap-2 flex-wrap" style="white-space: nowrap;">
+                        <a href="{% url 'doctor-view' doctor.id %}" class="btn btn-primary btn-sm">View</a>
+                        <a href="{% url 'doctor-edit' doctor.id %}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{% url 'toggle_doctor_status' doctor.id %}" method="POST">
+                            {% csrf_token %}
+                            {% if doctor.is_enabled %}
+                                <button type="submit" class="btn btn-danger btn-sm">Disable</button>
+                            {% else %}
+                                <button type="submit" class="btn btn-success btn-sm">Enable</button>
+                            {% endif %}
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" class="text-center">No doctors available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Pagination controls -->
+    <div class="d-flex justify-content-center mt-3">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1" aria-label="First">
+                        <span aria-hidden="true">&laquo;&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                    </span>
+                </li>
+
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
+                        <span aria-hidden="true">&raquo;&raquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock %}
